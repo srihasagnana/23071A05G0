@@ -2,25 +2,23 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function AboutPage() {
-  const [mentor, setMentor] = useState(null);  
+  const [mentor, setMentor] = useState(null);
   const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
-    // Retrieve the logged-in user from localStorage
     const user = JSON.parse(localStorage.getItem("loggedInUser"));
     setLoggedInUser(user);
 
     if (user) {
-      fetchMentorDetails(user);
+      fetchMentorDetails(user.mentor); 
     }
   }, []);
 
-  async function fetchMentorDetails(user) {
+  async function fetchMentorDetails(mentorName) {
     try {
       const result = await axios.get("http://localhost:3490/users");
-      // Assuming you can identify mentor based on a condition
-      const foundMentor = result.data.find(user => user.role === 'mentor'); 
-      setMentor(foundMentor);  
+      const foundMentor = result.data.find(user => user.mentor === mentorName); 
+      setMentor(foundMentor); 
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -32,13 +30,11 @@ function AboutPage() {
 
   return (
     <div className="text-center mt-5">
-      <h2>About Us</h2>
 
       {mentor ? (
         <div>
           <h3>Mentor Found:</h3>
-          <p>Name: {mentor.name}</p>
-          <p>Email: {mentor.email}</p> 
+          <p>Name: {mentor.mentor}</p>  
         </div>
       ) : (
         <p>No mentor found.</p>

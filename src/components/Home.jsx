@@ -14,10 +14,10 @@ function Home() {
           <Link className="nav-link fw-bold" to="/login">Login</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link fw-bold" to="/aboutpage">About Page</Link>
+          <Link className="nav-link fw-bold" to="/contact">About Page</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link fw-bold" to="/contact">Contact</Link>
+          <Link className="nav-link fw-bold" to="/aboutpage">Contact</Link>
         </li>
       </ul>
       <Outlet />
